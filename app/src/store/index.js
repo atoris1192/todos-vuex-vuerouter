@@ -14,12 +14,17 @@ const todo = {
   },
   mutations: {
     addTodo(state, item) {
-      state.push(item);
+      state.todos.push(item);
     }
   },
   actions: {
-    addTodo(item) {
-      this.commit('todo/addTodo', item)
+    addTodo({ commit }, payload) {
+      const item = {
+        id: new todo().getTime(),
+        title: payload.title,
+        message: payload.message,
+      }
+      commit('todo/addTodo', item)
     }
   },
   getters: {
@@ -34,6 +39,11 @@ const todo = {
 
 
 export default new Vuex.Store({
+  state: {
+    todos: [
+      {id: 0, title: 'sample', message: 'sample', isDone: false}
+    ]
+  },
   modules: {
     todo,
   },
