@@ -6,15 +6,16 @@
 
     section.section.content.has-background-light
       h1 debug area
-      p input: {{ input }} : {{ message }}
+      p input: {{ title }} : {{ message }}
       p todos: {{ todos }}
+      o mainTodos: {{ mainTodos }}
 
     section.section.has-text-centered.has-background-dark
       form.form(@submit.prevent="inputTodo")
         .field.has-addons
         label.label Title
           .control
-            input.input(type="text" placeholder="new Todo" v-model="input")
+            input.input(type="text" placeholder="new Todo" v-model="title")
         .field
           label.label Message
           .control
@@ -38,15 +39,17 @@ import Vue from 'vue'
 
 export default Vue.extend({
   data: () =>({
-    input: '',
+    title: '',
     message: '',
     todos: [],
+    mainTodos: [],
   }),
   mounted() {
-      this.todos = this.$store.state.todo.todos;
+      this.todos = this.$store.state.todoData.todos;
+      this.mainTodos = this.$store.state.todos;
   },
   computed: {
-    ...mapGetters('todo', ['getTodos', 'getTodoCount'])
+    ...mapGetters('todoData', ['getTodos', 'getTodoCount'])
     // ...mapGetters({
     //   getTodos: 'todo/getTodos',
     //   getTodoCount: 'todo/getTodoCount',
@@ -58,23 +61,22 @@ export default Vue.extend({
         title: this.title,
         message: this.message,
       }
-      this.$store.dispatch('todo/addTodo', payload);
+      this.$store.dispatch('todoData/addTodo', payload);
       this.title = '';
       this.message = '';
     }
     // inputTodo(e) {
     //   const item = {
-    //     title: this.input,
+    //     title: this.title,
     //     message: this.message,
     //   }
-      
-
+    //   this.addTodo(item);
     // },
     // ...mapActions({
-    //   inputTodo: 'todo/addTodo',
+    //   addTodo: 'addTodo'
+    // })
 
       
-    // })
   }
   
 })

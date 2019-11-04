@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-const todo = {
+const todoData = {
   namespaced: true,
   state: {
     todos: [
@@ -20,11 +20,11 @@ const todo = {
   actions: {
     addTodo({ commit }, payload) {
       const item = {
-        id: new todo().getTime(),
+        id: new Date().getTime(),
         title: payload.title,
         message: payload.message,
       }
-      commit('todo/addTodo', item)
+      commit('addTodo', item)
     }
   },
   getters: {
@@ -44,7 +44,24 @@ export default new Vuex.Store({
       {id: 0, title: 'sample', message: 'sample', isDone: false}
     ]
   },
+  mutations: {
+    addTodo(state, item) {
+      state.todos.push(item);
+    },
+  },
+  actions: {
+    addTodo({ commit }, payload) {
+      const item = {
+        id: new Date().getTime(),
+        title: payload.title,
+        message: payload.message,
+      }
+      commit('addTodo', item)
+    },
+
+  },
+
   modules: {
-    todo,
+    todoData,
   },
 });
