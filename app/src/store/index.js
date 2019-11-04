@@ -13,18 +13,18 @@ const todoData = {
     ],
   },
   mutations: {
-    addTodo(state, item) {
-      state.todos.push(item);
-    }
-  },
-  actions: {
-    addTodo({ commit }, payload) {
+    addTodo(state, payload) {
       const item = {
         id: new Date().getTime(),
         title: payload.title,
         message: payload.message,
       }
-      commit('addTodo', item)
+      state.todos.push(item);
+    }
+  },
+  actions: {
+    addTodo({ commit }, payload) {
+      commit('addTodo', payload)
     }
   },
   getters: {

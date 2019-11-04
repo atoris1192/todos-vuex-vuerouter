@@ -56,28 +56,29 @@ export default Vue.extend({
     // })
   },
   methods: {
-    inputTodo() {
-      const payload = {
+    inputTodo(e) {
+      const item = {
         title: this.title,
         message: this.message,
       }
-      this.$store.dispatch('todoData/addTodo', payload);
+      this.addTodo(item); // mapActions -> addTodo
       this.title = '';
       this.message = '';
-    }
-    // inputTodo(e) {
-    //   const item = {
+    },
+    ...mapActions('todoData', ['addTodo'])
+    // ...mapActions({
+    //   addTodo: 'todoData/addTodo',
+    // })
+
+    // inputTodo() {
+    //   const payload = {
     //     title: this.title,
     //     message: this.message,
     //   }
-    //   this.addTodo(item);
-    // },
-    // ...mapActions({
-    //   addTodo: 'addTodo'
-    // })
-
-      
+    //   this.$store.dispatch('todoData/addTodo', payload);
+    //   this.title = '';
+    //   this.message = '';
+    // }
   }
-  
 })
 </script>
