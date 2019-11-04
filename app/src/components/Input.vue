@@ -28,6 +28,10 @@ export default Vue.extend({
         message: this.message,
       }
       this.addTodo(item); // mapActions -> addTodo
+      this.$emit('inputData', { // 親要素へのデータ渡し debug input
+        title: this.title,
+        message: this.message,
+      })
       this.title = '';
       this.message = '';
     },

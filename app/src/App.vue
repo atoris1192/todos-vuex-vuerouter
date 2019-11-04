@@ -10,7 +10,8 @@
       p todos: {{ todos }}
       o mainTodos: {{ mainTodos }}
 
-    Input
+    // @inputData -> 子要素からのemitterリッスン
+    Input( @inputData="inputData($event)" ) 
     List
 
 
@@ -31,6 +32,13 @@ export default Vue.extend({
   }),
     computed: {
     ...mapGetters('todoData', ['getTodoCount'])
+  },
+  methods: {
+    inputData(item) { // debug input 表示用
+      // console.log(item);
+      this.title = item.title;
+      this.message = item.message;
+    }
   },
   mounted() {
       this.todos = this.$store.state.todoData.todos;
