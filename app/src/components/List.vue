@@ -25,6 +25,7 @@ export default Vue.extend({
       this.setTodo(item); // mapActions -> setTodo
     },
     ...mapActions('todoData', ['setTodo']),
+
   }
 })
 </script>
