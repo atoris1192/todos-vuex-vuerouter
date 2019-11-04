@@ -2,11 +2,11 @@
   section.section.has-text-centered.has-background-dark
     form.form(@submit.prevent="inputTodo")
       .field.has-addons
-      label.label Title
+      label.label.has-text-light Title
         .control
           input.input(type="text" placeholder="new Todo" v-model="title")
       .field
-        label.label Message
+        label.label.has-text-light Message
         .control
           textarea.textarea(placeholder="Textarea" v-model="message")
         .control

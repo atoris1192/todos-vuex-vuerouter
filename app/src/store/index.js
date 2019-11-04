@@ -11,6 +11,7 @@ const todoData = {
       { id: 1, title: 'title1', message: 'body1', isDone: true },
       { id: 2, title: 'title2', message: 'body2', isDone: false },
     ],
+    todo: {},
   },
   mutations: {
     addTodo(state, payload) {
@@ -20,12 +21,18 @@ const todoData = {
         message: payload.message,
       }
       state.todos.push(item);
+    },
+    setTodo(state, payload) {
+      state.todo = payload;
     }
   },
   actions: {
     addTodo({ commit }, payload) {
       commit('addTodo', payload)
-    }
+    },
+    setTodo({ commit }, payload) {
+      commit('setTodo', payload)
+    },
   },
   getters: {
     getTodos(state) {
@@ -33,7 +40,13 @@ const todoData = {
     },
     getTodoCount(state) {
       return state.todos.length;
+    },
+    getTodo(state) {
+      return state.todo;
     }
+    // getTodo: (state) => (id) => {
+    //   return state.todos.find(todo => todo.id === id);
+    // }
   }
 }
 

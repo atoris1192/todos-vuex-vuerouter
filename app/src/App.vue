@@ -8,10 +8,11 @@
       h1 debug area
       p input: {{ title }} : {{ message }}
       p todos: {{ todos }}
-      o mainTodos: {{ mainTodos }}
 
+    // input <> edit 切り替え予定
+    router-view
     // @inputData -> 子要素からのemitterリッスン
-    Input( @inputData="inputData($event)" ) 
+    //- Input( @inputData="inputData($event)" ) 
     List
 
 
