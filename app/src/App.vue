@@ -3,6 +3,7 @@
     section.section.has-text-centered
       h1.title todo app
       h2.sub-title {{ getTodoCount }}
+      button.button( @click="todoPurge") Purge
 
     router-view
     List
@@ -24,13 +25,17 @@ export default Vue.extend({
     mainTodos: [],
   }),
     computed: {
-    ...mapGetters('todoData', ['getTodoCount'])
+    ...mapGetters('todoData', ['getTodoCount', 'getTodos'])
   },
   methods: {
-    inputData(item) { // debug input 表示用
-      this.title = item.title;
-      this.message = item.message;
-    }
+    todoPurge() {
+      let newTodos = this.getTodos.slice();
+      const items = newTodos.filter( todo => {
+        return !todo.isDone;
+      })
+      this.setTodos(items);
+    },
+    ...mapActions('todoData', ['setTodos']),
   },
   mounted() {
       this.todos = this.$store.state.todoData.todos;
