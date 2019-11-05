@@ -24,7 +24,10 @@ const todoData = {
     },
     setTodo(state, payload) {
       state.todo = payload;
-    }
+    },
+    setTodos(state, payload) {
+      state.todos = payload;
+    },
   },
   actions: {
     addTodo({ commit }, payload) {
@@ -33,6 +36,9 @@ const todoData = {
     setTodo({ commit }, payload) {
       commit('setTodo', payload)
     },
+    setTodos({ commit }, payload) {
+      commit('setTodos', payload)
+    }
   },
   getters: {
     getTodos(state) {
@@ -43,10 +49,10 @@ const todoData = {
     },
     getTodo(state) {
       return state.todo;
+    },
+    getTodoId: (state) => (id) => {
+      return state.todos.find(todo => todo.id === id);
     }
-    // getTodo: (state) => (id) => {
-    //   return state.todos.find(todo => todo.id === id);
-    // }
   }
 }
 

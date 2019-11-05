@@ -23,29 +23,48 @@ export default Vue.extend({
     message: '',
   }),
   created() {
+    const id = this.$route.params.id
+    const item = this.getTodoId(id)
+    this.title = item.title;
+    this.message = item.message;
     
-    // this.title = 'dfsadfa'
-    this.title = this.getTodo.title;
-    this.message = this.getTodo.message;
+    
+    // this.title = this.getTodo.title;
+    // this.message = this.getTodo.message;
   },
   computed: {
-    ...mapGetters('todoData', ['getTodo']),
+    ...mapGetters('todoData', ['getTodos', 'getTodoId']),
   },
   methods: {
-    // inputTodo(e) {
-    //   const item = {
-    //     title: this.title,
-    //     message: this.message,
-    //   }
-    //   this.addTodo(item); // mapActions -> addTodo
-    //   this.$emit('inputData', { // 親要素へのデータ渡し debug input
-    //     title: this.title,
-    //     message: this.message,
-    //   })
-    //   this.title = '';
-    //   this.message = '';
-    // },
-    // ...mapActions('todoData', ['addTodo'])
+    inputTodo(e) {
+      const id = this.$route.params.id;
+      
+      let newTodos = this.getTodos.slice();
+      console.log('newTodos',newTodos);
+      
+      const item = {
+        id: id,
+        title: this.title,
+        message: this.message,
+      }
+      // console.log(item);
+      const pos = newTodos.map(item => {
+        return item.id;
+      }).indexOf(id);
+      // console.log("Pos: ",pos);
+      if (pos === -1) {
+        console.error("Edit.vue inputTodo: ID が　取得できません");
+        return
+      }
+      
+      newTodos.splice(pos, 1, item)
+      // console.log('splice: ',newTodos);
+      this.setTodos(newTodos);
+      this.title = '';
+      this.message = '';
+      this.$router.push({ name: 'input'})
+    },
+    ...mapActions('todoData', ['setTodos'])
   }
 });
 </script>

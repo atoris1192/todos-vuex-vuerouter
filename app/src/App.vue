@@ -11,8 +11,6 @@
 
     // input <> edit 切り替え予定
     router-view
-    // @inputData -> 子要素からのemitterリッスン
-    //- Input( @inputData="inputData($event)" ) 
     List
 
 
@@ -36,7 +34,6 @@ export default Vue.extend({
   },
   methods: {
     inputData(item) { // debug input 表示用
-      // console.log(item);
       this.title = item.title;
       this.message = item.message;
     }
