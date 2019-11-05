@@ -8,7 +8,7 @@
           span Title: {{ item.title }} / 
           span isDone: {{ item.isDone }}
           button.button( @click="editShowTodo(item)") Edit
-          button.button Delete
+          button.button( @click="deleteTodo(item)") Delete
 </template>
 <script>
 import Vue from 'vue'
@@ -24,8 +24,19 @@ export default Vue.extend({
       this.$router.push({ name: 'edit', params: { id }})
       this.setTodo(item); // mapActions -> setTodo
     },
-    ...mapActions('todoData', ['setTodo']),
-
+    deleteTodo(item) {
+      let newTodos = this.getTodos.slice();
+      const pos = newTodos.map(todo => {
+        return todo.id;
+      }).indexOf(item.id)
+      if (pos === -1) {
+        console.log("List.vue deleteTodo nothing id");
+        return
+      }
+      newTodos.splice(pos, 1);
+      this.setTodos(newTodos);
+    },
+    ...mapActions('todoData', ['setTodo', 'setTodos']),
   }
 })
 </script>

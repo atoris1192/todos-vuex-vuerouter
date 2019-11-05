@@ -4,12 +4,6 @@
       h1.title todo app
       h2.sub-title {{ getTodoCount }}
 
-    section.section.content.has-background-light
-      h1 debug area
-      p input: {{ title }} : {{ message }}
-      p todos: {{ todos }}
-
-    // input <> edit 切り替え予定
     router-view
     List
 
